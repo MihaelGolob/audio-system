@@ -110,7 +110,19 @@ public class AudioSystem : MonoBehaviour {
         }
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => _pool.Where(poolItem => poolItem.IsPlaying && poolItem.StopOnSceneChange).ToList().ForEach(StopSoundInternal);
+    /// <summary>
+    /// stop certain sounds when the scene changes
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="mode"></param>
+    /// <returns></returns>
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        foreach (var item in _poll) {
+            if (item.IsPlaying && item.StopOnSceneChange) {
+                StopSoundInternal(item);
+            }
+        }
+    }
     
     // SOUND PLAYING METHODS ---------------------------------------------------
     private ulong ConfigurePoolObject(PoolItem poolItem, string group, AudioClip clip, Vector3 position, float volume, float spatialBlend, 
@@ -307,8 +319,6 @@ public class AudioSystem : MonoBehaviour {
     
     public void StopSoundDelayed(float delay, ulong id) => StartCoroutine(StopSoundDelayedInternal(delay, id));
 
-    public void StopAll() => _pool.Where(poolItem => poolItem.IsPlaying).ToList().ForEach(StopSoundInternal);
-    
     /// <summary>
     /// Gradually lower the volume of a sound and then stop it.
     /// </summary>
@@ -340,12 +350,30 @@ public class AudioSystem : MonoBehaviour {
     /// <summary>
     /// Pause all sounds currently playing
     /// </summary>
-    public void PauseAll() => _pool.Where(item => item.IsPlaying).ToList().ForEach(item => item.Pause());
+    public void PauseAll() {
+        foreach (var item in _pool) {
+            if (item.IsPlaying) item.Pause();
+        }
+    }
 
     /// <summary>
     /// Resume all active sounds.
     /// </summary>
-    public void ResumeAll() => _pool.Where(item => !item.IsPlaying).ToList().ForEach(item => item.UnPause());
+    public void ResumeAll() {
+        foreach (var item in _pool) {
+            if (!item.IsPlaying) item.UnPause();
+        }
+    }
+
+    /// <summary>
+    /// stop all playing sounds
+    /// </summary>
+    /// <returns></returns>
+    public void StopAll() {
+        foreach (var item in _pool) {
+            if (item.IsPlaying) StopSoundInternal(item);
+        }
+    }
     
     // SOUND VOLUME METHODS -------------------------------------------------------
     
