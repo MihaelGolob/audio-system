@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
+namespace Ineor.Utils.AudioSystem {
+
 public class PoolItem {
     public GameObject GameObject;
     public AudioSource AudioSource;
@@ -408,4 +410,6 @@ public class AudioSystem : MonoBehaviour {
         
         poolItem.AudioSource.volume = volume;
     }
+}
+
 }

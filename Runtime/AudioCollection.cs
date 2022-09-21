@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Ineor.Utils.AudioSystem {
+    
 public enum PlayOrder {InOrder, Random, Reverse}
 
 /// <summary>
@@ -67,4 +69,5 @@ public class AudioCollection : ScriptableObject {
             };
         }
     }
+}
 }
