@@ -119,7 +119,7 @@ public class AudioSystem : MonoBehaviour {
     /// <param name="mode"></param>
     /// <returns></returns>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        foreach (var item in _poll) {
+        foreach (var item in _pool) {
             if (item.IsPlaying && item.StopOnSceneChange) {
                 StopSoundInternal(item);
             }
