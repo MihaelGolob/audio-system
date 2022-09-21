@@ -1,4 +1,5 @@
 using UnityEngine;
+using Ineor.Utils.AudioSystem;
 
 /// <summary>
 /// A stateMachineBehaviour script which can be attached to an animation state to
