@@ -1,4 +1,4 @@
-# Ineor Audio System package
+# Audio System package
 
 ## How to use
 The main script of the package is the `AudioManager.cs` script. It is a singleton and can be accessed from anywhere in the project.
